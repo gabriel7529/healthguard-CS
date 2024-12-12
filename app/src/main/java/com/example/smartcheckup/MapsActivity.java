@@ -30,7 +30,8 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    double lon,lat;
+    double log;
+    double lat;
     int s=0;
     String add;
     Address obj;
