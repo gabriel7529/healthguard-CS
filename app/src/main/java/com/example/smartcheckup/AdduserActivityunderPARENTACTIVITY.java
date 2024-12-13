@@ -33,7 +33,7 @@ public class AdduserActivityunderPARENTACTIVITY extends AppCompatActivity {
     FirebaseAuth auth,a;
     int count=0;
     String childnames;
-    static int childcount;
+    static int  childcount;
     static int done;
     String name;
     String useremail;
@@ -54,7 +54,7 @@ public class AdduserActivityunderPARENTACTIVITY extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    final DatabaseReference childuser=FirebaseDatabase.getInstance().getReference().child("Parents").child(a.getUid()).child("NumberofChild");
+                    final DatabaseReference childuser=FirebaseDatabase.getInstance().getReference().child(getString(R.string.parents)).child(a.getUid()).child("NumberofChild");
                     childuser.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
