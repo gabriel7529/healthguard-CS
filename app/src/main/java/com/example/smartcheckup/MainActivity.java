@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                              username = user.getText().toString();
-                                            username = username.substring(0, username.indexOf("@"));
+                                             username = username.substring(0, username.indexOf("@"));
 
                                             try {
                                                 String checkchild = dataSnapshot.child(username).getValue().toString();
