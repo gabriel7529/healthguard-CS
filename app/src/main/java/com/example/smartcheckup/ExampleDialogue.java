@@ -3,9 +3,9 @@ package com.example.smartcheckup;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import android.text.Editable;
@@ -15,11 +15,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ExampleDialouge extends AppCompatDialogFragment {
+public class ExampleDialogue extends AppCompatDialogFragment {
     private EditText editTextUsername;
     private TextView counter;
     private Exampledialougelistner listner;
-    String text;int symbols;int c=30;
+    String text;
+    int symbols;
+    int c=30;
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.TimePickerTheme);
@@ -29,19 +33,13 @@ public class ExampleDialouge extends AppCompatDialogFragment {
 
         builder.setView(view)
                 .setTitle("Write Short Remainder")
-                .setNegativeButton("Ignore Remainder", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String u="";
-                        listner.applyText(u);
-                    }
+                .setNegativeButton("Ignore Remainder", (dialogInterface, i) -> {
+                    String u="";
+                    listner.applyText(u);
                 })
-                .setPositiveButton("Set Remainder", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String username = editTextUsername.getText().toString();
-                        listner.applyText(username);
-                    }
+                .setPositiveButton("Set Remainder", (dialogInterface, i) -> {
+                    String username = editTextUsername.getText().toString();
+                    listner.applyText(username);
                 });
 
         editTextUsername = view.findViewById(R.id.remainder);
@@ -50,6 +48,7 @@ public class ExampleDialouge extends AppCompatDialogFragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                // TODO document needed before the text changes
             }
 
             @Override
