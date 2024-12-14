@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +8,8 @@
     tools:context=".useractivity"
     android:gravity="center"
     android:background="#fcfcfc"
-    android:padding="10sp">
+    android:paddingLeft="9sp"
+    android:paddingRight="10sp">
 
     <TextView
         android:layout_width="111dp"
@@ -148,8 +149,8 @@
         android:gravity="center"
         android:id="@+id/l2"
         android:background="@color/backgroundcolor">
-        
-        
+
+
         <androidx.cardview.widget.CardView
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -198,7 +199,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        
+
 
     </LinearLayout>
     <LinearLayout
@@ -219,13 +220,15 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 >
+
                 <ImageView
                     android:layout_width="64sp"
                     android:layout_height="64sp"
+                    android:adjustViewBounds="true"
                     android:background="@drawable/circle2green"
-                    android:src="@drawable/alarm"
+                    android:cropToPadding="true"
                     android:padding="10sp"
-                    />
+                    android:src="@drawable/alarm" />
 
                 <TextView
                     android:layout_width="79sp"
@@ -256,7 +259,5 @@
 
     </LinearLayout>
     </LinearLayout>
-
-
 
 </LinearLayout>
