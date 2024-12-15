@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.activities;
 
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -22,6 +22,13 @@ import android.widget.PopupMenu;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.smartcheckup.dialogs.ExampleDialogue;
+import com.example.smartcheckup.R;
+import com.example.smartcheckup.dialogs.Sendsmstowatchdialog;
+import com.example.smartcheckup.parent_features.parentalarmtopic;
+import com.example.smartcheckup.parent_features.parentsendsmstowatch;
+import com.example.smartcheckup.parent_features.parentstoreremainder;
+import com.example.smartcheckup.parent_features.remote_health_PARENT;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -45,7 +52,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
-public class parentactivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, ExampleDialogue.Exampledialougelistner,Sendsmstowatchdialog.SendsmstowatchdialogListner{
+public class parentactivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, ExampleDialogue.Exampledialougelistner, Sendsmstowatchdialog.SendsmstowatchdialogListner {
 
     Animation a1,a2,a3;
     LinearLayout l1,l2,l3,l4;
@@ -316,7 +323,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
     public void health(View view) {
 
         //Toast.makeText(parentactivity.this,"UNDER DEVELOPMENT",Toast.LENGTH_SHORT).show()
-        Intent i=new Intent(parentactivity.this,remote_health_PARENT.class);
+        Intent i=new Intent(parentactivity.this, remote_health_PARENT.class);
         i.putExtra("id", accountholder);
         i.putExtra("uidd",firebaseUser.getUid().toString());
         startActivity(i);

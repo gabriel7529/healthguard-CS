@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.activities;
 
 import android.content.Intent;
 import androidx.annotation.NonNull;
@@ -13,6 +13,8 @@ import android.widget.EditText;
 
 import android.widget.Toast;
 
+import com.example.smartcheckup.R;
+import com.example.smartcheckup.firebase.StoreparentdatatoFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

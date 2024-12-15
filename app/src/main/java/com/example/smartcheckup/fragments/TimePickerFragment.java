@@ -1,14 +1,15 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.fragments;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.smartcheckup.R;
 
 import java.util.Calendar;
 
@@ -21,7 +22,7 @@ public class TimePickerFragment extends DialogFragment {
         int h=c.get(Calendar.HOUR_OF_DAY);
         int m=c.get(Calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity(),R.style.TimePickerTheme,(TimePickerDialog.OnTimeSetListener)getActivity(),
+        return new TimePickerDialog(getActivity(), R.style.TimePickerTheme,(TimePickerDialog.OnTimeSetListener)getActivity(),
                 h,m,true);
     }
 }

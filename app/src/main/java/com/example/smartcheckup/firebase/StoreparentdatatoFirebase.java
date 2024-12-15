@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.firebase;
 
 public class StoreparentdatatoFirebase {
 

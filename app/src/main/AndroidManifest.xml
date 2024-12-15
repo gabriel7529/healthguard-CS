@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name=".App"
+        android:name=".utils.App"
         android:allowBackup="true"
         android:icon="@drawable/appicon2"
         android:keepScreenOn="true"
@@ -23,18 +23,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".remote_health_PARENT" />
+        <activity android:name=".parent_features.remote_health_PARENT" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
 
-        <activity android:name=".signup" />
-        <activity android:name=".AdduserActivityunderPARENTACTIVITY" />
-        <activity android:name=".useractivity" />
-        <activity android:name=".parentactivity" />
+        <activity android:name=".activities.signup" />
+        <activity android:name=".activities.AdduserActivityunderPARENTACTIVITY" />
+        <activity android:name=".activities.useractivity" />
+        <activity android:name=".activities.parentactivity" />
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.example.smartcheckup.R;
+
 public class Sendsmstowatchdialog extends AppCompatDialogFragment {
 
     private EditText editTextUsername;
@@ -23,7 +25,7 @@ public class Sendsmstowatchdialog extends AppCompatDialogFragment {
     String text;int symbols;int c=30;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.TimePickerTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.TimePickerTheme);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.parentsendmessage, null);

@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.activities;
 
 import android.content.Intent;
 import android.location.Address;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.smartcheckup.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,8 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
-import java.security.spec.ECField;
 import java.util.List;
 import java.util.Locale;
 

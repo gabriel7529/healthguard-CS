@@ -1,9 +1,7 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.activities;
 
 import android.Manifest;
-import android.accessibilityservice.AccessibilityService;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.provider.Settings;
 
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -30,11 +27,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.smartcheckup.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -389,7 +386,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signup(View view) {
-        Intent i=new Intent(MainActivity.this,signup.class);
+        Intent i=new Intent(MainActivity.this, signup.class);
         startActivity(i);
 
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_list"
     android:id="@+id/layout"
-    tools:context=".signup">
+    tools:context=".activities.signup">
 
     <TextView
         android:layout_width="match_parent"

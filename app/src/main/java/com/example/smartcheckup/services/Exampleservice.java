@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.services;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -16,12 +16,14 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.smartcheckup.R;
+import com.example.smartcheckup.activities.useractivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import static com.example.smartcheckup.App.channelid;
+import static com.example.smartcheckup.utils.App.channelid;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -47,7 +49,7 @@ public class Exampleservice extends Service implements  GoogleApiClient.Connecti
         uid=intent.getStringExtra("uid");
         user=intent.getStringExtra("user");
 
-        Intent notificationintent=new Intent(Exampleservice.this,useractivity.class);
+        Intent notificationintent=new Intent(Exampleservice.this, useractivity.class);
 
         Toast.makeText(Exampleservice.this,"UID: "+uid,Toast.LENGTH_SHORT).show();
         PendingIntent pendingIntent=PendingIntent.getActivity(Exampleservice.this,

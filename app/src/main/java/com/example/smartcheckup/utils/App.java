@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.utils;
 
 import android.app.Application;
 import android.app.NotificationChannel;

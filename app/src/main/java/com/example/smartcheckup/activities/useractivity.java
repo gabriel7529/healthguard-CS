@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -27,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.smartcheckup.R;
+import com.example.smartcheckup.fragments.TimePickerFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;

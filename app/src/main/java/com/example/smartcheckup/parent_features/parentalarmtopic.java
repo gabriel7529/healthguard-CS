@@ -1,4 +1,4 @@
-package com.example.smartcheckup;
+package com.example.smartcheckup.parent_features;
 
 public class parentalarmtopic {
 
