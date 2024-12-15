@@ -160,24 +160,24 @@
     android:orientation="horizontal"
     android:layout_gravity="center"
     >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="72sp"
-        android:text="Create New Account"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:layout_marginLeft="80sp"
-        android:textStyle="bold"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="#000"
+        android:layout_marginLeft="80sp"
         android:layout_marginTop="-30sp"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="signup"
+        android:shadowColor="@color/black_overlay"
         android:shadowDx="2"
         android:shadowDy="2"
-        android:shadowColor="@color/black_overlay"
-        android:clickable="true"
-        android:onClick="signup"
-        />
+        android:text="Create New Account"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
 

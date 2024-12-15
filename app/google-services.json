@@ -1,45 +1,26 @@
 {
   "project_info": {
-    "project_number": "853405974693",
-    "firebase_url": "https://smartwatch-dabb1.firebaseio.com",
-    "project_id": "smartwatch-dabb1",
-    "storage_bucket": "smartwatch-dabb1.appspot.com"
+    "project_number": "1053752240292",
+    "project_id": "healthguard-ac471",
+    "storage_bucket": "healthguard-ac471.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:853405974693:android:86afa11fce18769a",
+        "mobilesdk_app_id": "1:1053752240292:android:aa21ed242336f4bfd79e31",
         "android_client_info": {
           "package_name": "com.example.smartcheckup"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "853405974693-v46j3o2i67jonf45ikhae3lp0sg0avo8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.smartcheckup",
-            "certificate_hash": "8e1a8aaf0564acf5047f5ffd6a1a83fc8493c65c"
-          }
-        },
-        {
-          "client_id": "853405974693-ni2i32lis62ocqo5m2ld0ckv30brvn4d.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC525kJXU-ldxnSDJ1PPY_PUeD1OuM_1Ys"
+          "current_key": "AIzaSyBionQDHO01JJzbL3-eH5o7OQS00U9eqMk"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "853405974693-ni2i32lis62ocqo5m2ld0ckv30brvn4d.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

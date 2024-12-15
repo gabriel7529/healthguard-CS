@@ -4,29 +4,21 @@ import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 
 import android.os.Bundle;
-import android.text.style.AbsoluteSizeSpan;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AbsoluteLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -41,11 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.StringTokenizer;
-
 import static android.app.Notification.DEFAULT_LIGHTS;
 import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
@@ -58,7 +45,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
-public class parentactivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, ExampleDialouge.Exampledialougelistner,Sendsmstowatchdialog.SendsmstowatchdialogListner{
+public class parentactivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, ExampleDialogue.Exampledialougelistner,Sendsmstowatchdialog.SendsmstowatchdialogListner{
 
     Animation a1,a2,a3;
     LinearLayout l1,l2,l3,l4;
@@ -126,7 +113,6 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                                     }
 
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -135,7 +121,6 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                 }
             }
         });
-
 
         pro.setMessage("Getting All Users...");
         pro.show();
@@ -454,7 +439,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
 
 
     private void openDialouge() {
-        ExampleDialouge exampleDialouge=new ExampleDialouge();
+        ExampleDialogue exampleDialouge=new ExampleDialogue();
         exampleDialouge.show(getSupportFragmentManager(),"Example");
     }
 
@@ -473,6 +458,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
         i.putExtra("pass",pass);
         startActivity(i);
     }  //option
+
 
     @Override
     public void applysms(String username) {          //FOR SENDING SMS TO WATCH DIALOGUE
@@ -503,10 +489,7 @@ public void listitem()
             {
                 listitem();
             }
-
-
         }
-
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -563,6 +546,4 @@ public void changechild(View view) {
     });
 
     }  //changing user account
-
-
 }

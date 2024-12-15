@@ -62,8 +62,9 @@ public class signup extends AppCompatActivity {
         {
             p.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
-        else
-        p.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        else {
+            p.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        }
 
     }
 

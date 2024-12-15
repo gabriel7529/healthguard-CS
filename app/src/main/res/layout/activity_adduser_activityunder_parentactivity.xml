@@ -56,11 +56,11 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/eye"
                 android:layout_marginStart="-40dp"
                 android:layout_marginTop="50dp"
                 android:clickable="true"
-                android:onClick="showpassword" />
+                android:onClick="showpassword"
+                android:src="@drawable/eye" />
         </LinearLayout>
     </LinearLayout>
 

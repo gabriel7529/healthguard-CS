@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 l4.setAnimation(a1);
                 user = findViewById(R.id.user);
                 pass = findViewById(R.id.pass);
-                auth = FirebaseAuth.getInstance();  //IMPORTANT
+                auth = FirebaseAuth.getInstance();
                 u = findViewById(R.id.userradio);
                 p = findViewById(R.id.parentradio);
                 parentid = findViewById(R.id.parentid);
@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode==PERMISSION_CODE)
         {
             if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED)
@@ -282,13 +283,13 @@ public class MainActivity extends AppCompatActivity {
                             else
                             {
 
-                                DatabaseReference child=FirebaseDatabase.getInstance().getReference().child("Parents").child(aa).child("children");
+                                DatabaseReference child= FirebaseDatabase.getInstance().getReference().child("Parents").child(aa).child("children");
                                 child.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                              username = user.getText().toString();
-                                            username = username.substring(0, username.indexOf("@"));
+                                             username = username.substring(0, username.indexOf("@"));
 
                                             try {
                                                 String checkchild = dataSnapshot.child(username).getValue().toString();
@@ -302,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                                                         if (childemail.equals(user.getText().toString()) && childpass.equals(pass.getText().toString())) {
                                                             if(i==0) {
                                                                 Toast.makeText(MainActivity.this, "WELCOME " + childname.toUpperCase(), Toast.LENGTH_SHORT).show();
-                                                                // NEW ACTIVITY STARTS
+
                                                                 i = 1;
                                                                 Intent i = new Intent(MainActivity.this, useractivity.class);
                                                                 i.putExtra("uid", aa);

@@ -8,27 +8,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Handler;
-import android.provider.Settings;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -39,126 +32,124 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Time;
+public class useractivity extends AppCompatActivity implements
+        TimePickerDialog.OnTimeSetListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        com.google.android.gms.location.LocationListener {
 
-public class useractivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener  , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
     LinearLayout l1, l2, l3;
     Animation a1, a2, a3;
     static String user;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final String TAG = "useractivity";
+
     static String uid;
     static int s = 1;
-    private LocationManager manager;
-    android.os.Handler customHandler;
-    FusedLocationProviderClient client;
-    DatabaseReference locationinfo;
-    static int check=1;
-    private static final String TAG = "MainActivity";
-    private GoogleApiClient mGoogleApiClient;
-    private Location mLocation;
-    private LocationManager mLocationManager;
+    static int check = 1;
+    static String watchid = "";
+    int watchset;
 
+    private LocationManager manager;
+    private LocationManager mLocationManager;
     private LocationRequest mLocationRequest;
-    private com.google.android.gms.location.LocationListener listener;
+    private FusedLocationProviderClient fusedLocationClient;
+    private FusedLocationProviderClient client;
+    private Location mLocation;
+    private GoogleApiClient mGoogleApiClient;
+
+    private DatabaseReference locationinfo;
+
     private long UPDATE_INTERVAL = 2 * 10000;  /* 20 secs */
     private long FASTEST_INTERVAL = 4000; /* 2 sec */
-    static String watchid="";
-    int watchset;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_useractivity);
 
+        // Initialize GoogleApiClient
+        initGoogleApiClient();
 
-            setContentView(R.layout.activity_useractivity);
+        Intent i = getIntent();
+        uid = i.getStringExtra("uid");
+        user = i.getStringExtra("child");
 
-            Intent i=getIntent();
-            uid = i.getStringExtra("uid");
-            user = i.getStringExtra("child");
+        l1 = findViewById(R.id.l1);
+        l2 = findViewById(R.id.l2);
+        l3 = findViewById(R.id.l3);
+        a1 = AnimationUtils.loadAnimation(useractivity.this, R.anim.topdown);
+        a3 = AnimationUtils.loadAnimation(useractivity.this, R.anim.rightside);
+        a2 = AnimationUtils.loadAnimation(useractivity.this, R.anim.leftside);
+        l1.setAnimation(a1);
+        l2.setAnimation(a2);
+        l3.setAnimation(a3);
 
-            l1 = (LinearLayout) findViewById(R.id.l1);
-            l2 = (LinearLayout) findViewById(R.id.l2);
-            l3 = (LinearLayout) findViewById(R.id.l3);
-            a1 = AnimationUtils.loadAnimation(useractivity.this, R.anim.topdown);
-            a3 = AnimationUtils.loadAnimation(useractivity.this, R.anim.rightside);
-            a2 = AnimationUtils.loadAnimation(useractivity.this, R.anim.leftside);
-            l1.setAnimation(a1);
-            l2.setAnimation(a2);
-            l3.setAnimation(a3);
+        if (!isLocationEnabled(useractivity.this)) buildDialog(useractivity.this).show();
 
-
-
-        if(!isLocationEnabled(useractivity.this)) buildDialog(useractivity.this).show();
-
-
-        DatabaseReference m=FirebaseDatabase.getInstance().getReference().child("Parents").child(uid).child("children").child(user);
+        DatabaseReference m = FirebaseDatabase.getInstance().getReference().child("Parents").child(uid).child("children").child(user);
         m.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try{
-                    watchid=dataSnapshot.child("WatchId").getValue().toString();
-                    watchset=1;
-                }catch (NullPointerException e)
-                {
-                    watchid="";
-                    watchset=1;
+                try {
+                    watchid = dataSnapshot.child("WatchId").getValue().toString();
+                    watchset = 1;
+                } catch (NullPointerException e) {
+                    watchid = "";
+                    watchset = 1;
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(!watchid.equals(""))
-                {
+                if (!watchid.equals("")) {
                     Toast.makeText(useractivity.this, watchid + " is choosen", Toast.LENGTH_SHORT).show();
-
-                }
-                else {
+                } else {
                     Toast.makeText(useractivity.this, "No Watch is choosen", Toast.LENGTH_SHORT).show();
-                    watchset=1;
+                    watchset = 1;
                 }
             }
-        },1000);
-
+        }, 1000);
 
         locationinfo = FirebaseDatabase.getInstance().getReference().child("Parents").child(uid).child("children").child(user);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    }
+
+    // Initialize GoogleApiClient method
+    private void initGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(useractivity.this)
+                .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-
-        mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-
-
     }
 
-    public android.app.AlertDialog.Builder buildDialog(Context c) {
+    // Remaining methods from the original code...
 
-        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(c,R.style.TimePickerTheme);
+    public android.app.AlertDialog.Builder buildDialog(Context c) {
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(c, R.style.TimePickerTheme);
         builder.setTitle("No GPS Connection");
         builder.setMessage("You need to have GPS turned ON to access this. Press OK if done");
         builder.setCancelable(false);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(!isLocationEnabled(useractivity.this)) buildDialog(useractivity.this).show();
-
+                if (!isLocationEnabled(useractivity.this)) buildDialog(useractivity.this).show();
             }
         }).setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
             @Override
@@ -168,57 +159,58 @@ public class useractivity extends AppCompatActivity implements TimePickerDialog.
         });
 
         return builder;
-    }  //CHECKS FOR INTERNET CONNECTION
-
-    private boolean isLocationEnabled(Context context) {
-        LocationManager lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-
-        if ( !lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-            return false;
-        }
-        else
-            return  true;
     }
 
+    private boolean isLocationEnabled(Context context) {
+        LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         super.onPause();
-    }  //NOT LOGGING OUT
+    }
 
     @Override
     public void onConnected(Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
 
+            ActivityCompat.requestPermissions(useractivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
             return;
         }
 
-        startLocationUpdates();
-
-        mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        if(mLocation == null){
-            startLocationUpdates();
-        }
-        if (mLocation != null) {
-
-        } else {
-            Toast.makeText(this, "Location not Detected", Toast.LENGTH_SHORT).show();
-        }
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, location -> {
+                    if (location != null) {
+                        mLocation = location;
+                        Toast.makeText(this, "Location detected: " + location.getLatitude() + ", " + location.getLongitude(),
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        startLocationUpdates();
+                    }
+                })
+                .addOnFailureListener(this, e -> {
+                    Toast.makeText(this, "Failed to get location: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     @Override
     public void onConnectionSuspended(int i) {
         Log.i(TAG, "Connection Suspended");
-        mGoogleApiClient.connect();
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.i(TAG, "Connection failed. Error: " + connectionResult.getErrorCode());
     }
-
 
     @Override
     protected void onStart() {
@@ -228,44 +220,36 @@ public class useractivity extends AppCompatActivity implements TimePickerDialog.
         }
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
-        if (mGoogleApiClient.isConnected()) {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
     }
 
     protected void startLocationUpdates() {
-        // Create the location request
-       mLocationRequest = LocationRequest.create()
+        mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL)
                 .setFastestInterval(FASTEST_INTERVAL);
-        // Request location updates
-        if (ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
+        if (ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(useractivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
-                mLocationRequest, this);
-        //Log.d("reque", "--->>>>");
+
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, mLocationRequest, this);
     }
 
     @Override
     public void onLocationChanged(Location location) {
         locationinfo.child("userloc_LATITUDE").setValue(String.valueOf(location.getLatitude()));
         locationinfo.child("userloc_LONGITUDE").setValue(String.valueOf(location.getLongitude()));
-
     }
-
-
-
-
-
-
-
 
     //OPTIONS FOR WATCH
 
