@@ -52,7 +52,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
-public class parentactivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, ExampleDialogue.Exampledialougelistner, Sendsmstowatchdialog.SendsmstowatchdialogListner {
+public class Interactivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, ExampleDialogue.Exampledialougelistner, Sendsmstowatchdialog.SendsmstowatchdialogListner {
 
     Animation a1,a2,a3;
     LinearLayout l1,l2,l3,l4;
@@ -81,9 +81,9 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
         l2 = (LinearLayout) findViewById(R.id.l2);
         l3 = (LinearLayout) findViewById(R.id.adduser);
         l4 = (LinearLayout) findViewById(R.id.userchangeicon);
-        a1 = AnimationUtils.loadAnimation(parentactivity.this, R.anim.onlyleftsidemove);
-        a2 = AnimationUtils.loadAnimation(parentactivity.this, R.anim.onlyrightisdemove);
-        a3 = AnimationUtils.loadAnimation(parentactivity.this, R.anim.downdown);
+        a1 = AnimationUtils.loadAnimation(Interactivity.this, R.anim.onlyleftsidemove);
+        a2 = AnimationUtils.loadAnimation(Interactivity.this, R.anim.onlyrightisdemove);
+        a3 = AnimationUtils.loadAnimation(Interactivity.this, R.anim.downdown);
         l1.setAnimation(a1);
         l2.setAnimation(a2);
         l3.setAnimation(a3);
@@ -95,7 +95,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
 
 
 
-        pro=new ProgressDialog(parentactivity.this);
+        pro=new ProgressDialog(Interactivity.this);
         auth = FirebaseAuth.getInstance();
         auth.signInWithEmailAndPassword(user, pass);
         mref = FirebaseDatabase.getInstance().getReference().child("Parents");
@@ -157,7 +157,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                                 }
                                 start = 1;
                                 pro.cancel();
-                                Toast.makeText(parentactivity.this, "Current User: " + accountholder, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Interactivity.this, "Current User: " + accountholder, Toast.LENGTH_SHORT).show();
                                 if (accountholder.isEmpty()) //FOR NEW ACCOUNTS TO ADD USERS
                                 {
                                     pro.setMessage("You Need To Have Atleast One User");
@@ -165,7 +165,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent ii = new Intent(parentactivity.this, AdduserActivityunderPARENTACTIVITY.class);
+                                            Intent ii = new Intent(Interactivity.this, AdduserActivityunderPARENTACTIVITY.class);
                                             ii.putExtra("user", user);
                                             ii.putExtra("pass", pass);
                                             pro.cancel();
@@ -208,7 +208,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
 
                             NotificationManager mNotificationManager;
 
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(parentactivity.this, "notify_001");
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(Interactivity.this, "notify_001");
 
 
                             NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
@@ -241,7 +241,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
 
                             try{
                                 index++;
-                             AlertDialog.Builder alert=new AlertDialog.Builder(parentactivity.this,R.style.TimePickerTheme);
+                             AlertDialog.Builder alert=new AlertDialog.Builder(Interactivity.this,R.style.TimePickerTheme);
                             alert.setMessage("CHECK USER STATUS IMMEDIATELY\nPress 'OK' multiple times to acknowledge").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -287,7 +287,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                     double a = Double.parseDouble(dataSnapshot.child("userloc_LONGITUDE").getValue().toString());
                     double b= Double.parseDouble(dataSnapshot.child("userloc_LATITUDE").getValue().toString());
 
-                    Intent maps = new Intent(parentactivity.this, MapsActivity.class);
+                    Intent maps = new Intent(Interactivity.this, MapsActivity.class);
                     maps.putExtra("id", accountholder);
                     maps.putExtra("uidd",firebaseUser.getUid().toString());
                     maps.putExtra("lat",b);
@@ -297,7 +297,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                 }
                 catch (Exception e)
                 {
-                    Toast.makeText(parentactivity.this,"NO DATA AVAILABLE",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Interactivity.this,"NO DATA AVAILABLE",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -323,7 +323,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
     public void health(View view) {
 
         //Toast.makeText(parentactivity.this,"UNDER DEVELOPMENT",Toast.LENGTH_SHORT).show()
-        Intent i=new Intent(parentactivity.this, remote_health_PARENT.class);
+        Intent i=new Intent(Interactivity.this, remote_health_PARENT.class);
         i.putExtra("id", accountholder);
         i.putExtra("uidd",firebaseUser.getUid().toString());
         startActivity(i);
@@ -334,7 +334,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
 
 
 
-        PopupMenu p=new PopupMenu(parentactivity.this,view );
+        PopupMenu p=new PopupMenu(Interactivity.this,view );
         p.getMenuInflater().inflate(R.menu.remainderpickuppopup,p.getMenu());
         p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -356,22 +356,22 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                                 int b = Integer.parseInt(dataSnapshot.child("parentalarmminute").getValue().toString());
                                 if(a==200&&b==200)
                                 {
-                                    Toast.makeText(parentactivity.this, "No Alarm Preset", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Interactivity.this, "No Alarm Preset", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
                                     if (a < 10 && b > 9)
-                                        Toast.makeText(parentactivity.this, "Your Alarm Is Set At: 0" + dataSnapshot.child("parentalarmhour").getValue().toString() + ":" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Interactivity.this, "Your Alarm Is Set At: 0" + dataSnapshot.child("parentalarmhour").getValue().toString() + ":" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
                                     else if (b < 10 && a > 9)
-                                        Toast.makeText(parentactivity.this, "Your Alarm Is Set At: " + dataSnapshot.child("parentalarmhour").getValue().toString() + ":0" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Interactivity.this, "Your Alarm Is Set At: " + dataSnapshot.child("parentalarmhour").getValue().toString() + ":0" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
                                     else if (a < 10 && b < 10)
-                                        Toast.makeText(parentactivity.this, "Your Alarm Is Set At: 0" + dataSnapshot.child("parentalarmhour").getValue().toString() + ":0" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Interactivity.this, "Your Alarm Is Set At: 0" + dataSnapshot.child("parentalarmhour").getValue().toString() + ":0" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
                                     else
-                                        Toast.makeText(parentactivity.this, "Your Alarm Is Set At: " + dataSnapshot.child("parentalarmhour").getValue().toString() + ":" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Interactivity.this, "Your Alarm Is Set At: " + dataSnapshot.child("parentalarmhour").getValue().toString() + ":" + dataSnapshot.child("parentalarmminute").getValue().toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                             catch (NullPointerException e)
                             {
-                                Toast.makeText(parentactivity.this, "No Alarm Preset", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Interactivity.this, "No Alarm Preset", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -425,7 +425,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                                                     //Toast.makeText(parentactivity.this,"TIME SET",Toast.LENGTH_SHORT).show();
                                                 }
                                                 else{
-                                                    Toast.makeText(parentactivity.this,"FIREBASE FAILED DUE TO UNKNOWN REASONS",Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(Interactivity.this,"FIREBASE FAILED DUE TO UNKNOWN REASONS",Toast.LENGTH_SHORT).show();
                                                 }
 
                                             }
@@ -434,7 +434,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
                         }
                         else
                         {
-                            Toast.makeText(parentactivity.this,"FIREBASE FAILED",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Interactivity.this,"FIREBASE FAILED",Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -455,12 +455,12 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
 
         parentalarmtopic p=new parentalarmtopic(username);
         mref.child(firebaseUser.getUid()).child("children").child(accountholder).child("Parent_AlarmDetails").child("alarm topic").setValue(p);
-        Toast.makeText(parentactivity.this,"Remainder Set Succesfully",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Interactivity.this,"Remainder Set Succesfully",Toast.LENGTH_SHORT).show();
     }   //FOR SENDING ALARM REMAINDER TO WATCH DIALOGUE
 
     public void adduser(View view) {
 
-        Intent i=new Intent(parentactivity.this,AdduserActivityunderPARENTACTIVITY.class);
+        Intent i=new Intent(Interactivity.this,AdduserActivityunderPARENTACTIVITY.class);
         i.putExtra("user",user);
         i.putExtra("pass",pass);
         startActivity(i);
@@ -476,7 +476,7 @@ public class parentactivity extends AppCompatActivity implements TimePickerDialo
         else {
             parentsendsmstowatch p = new parentsendsmstowatch(username);
             mref.child(firebaseUser.getUid()).child("children").child(accountholder).child("PARENT_SMS").setValue(p);
-            Toast.makeText(parentactivity.this, "Message Sent Succesfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Interactivity.this, "Message Sent Succesfully", Toast.LENGTH_SHORT).show();
         }
     } //Submitting SMS
 
@@ -522,7 +522,7 @@ public void listitem()
 public void changechild(View view) {
 
 
-        menu=new PopupMenu(parentactivity.this,view);
+        menu=new PopupMenu(Interactivity.this,view);
         /*pro.setMessage("One Moment..");
         pro.show();
         listitem();
@@ -547,7 +547,7 @@ public void changechild(View view) {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             accountholder=item.toString();
-            Toast.makeText(parentactivity.this,"Current User: "+accountholder,Toast.LENGTH_SHORT).show();
+            Toast.makeText(Interactivity.this,"Current User: "+accountholder,Toast.LENGTH_SHORT).show();
             return true;
         }
     });

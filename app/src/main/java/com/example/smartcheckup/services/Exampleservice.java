@@ -17,7 +17,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.smartcheckup.R;
-import com.example.smartcheckup.activities.useractivity;
+import com.example.smartcheckup.activities.Reactivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -49,7 +49,7 @@ public class Exampleservice extends Service implements  GoogleApiClient.Connecti
         uid=intent.getStringExtra("uid");
         user=intent.getStringExtra("user");
 
-        Intent notificationintent=new Intent(Exampleservice.this, useractivity.class);
+        Intent notificationintent=new Intent(Exampleservice.this, Reactivity.class);
 
         Toast.makeText(Exampleservice.this,"UID: "+uid,Toast.LENGTH_SHORT).show();
         PendingIntent pendingIntent=PendingIntent.getActivity(Exampleservice.this,

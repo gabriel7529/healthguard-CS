@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(task.isSuccessful())
                                 {
                                     Toast.makeText(MainActivity.this,"Signed In",Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(MainActivity.this, parentactivity.class);
+                                    Intent i = new Intent(MainActivity.this, Interactivity.class);
                                     i.putExtra("username",user.getText().toString());
                                     i.putExtra("password",pass.getText().toString());
                                     pro.cancel();
@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                                                                 Toast.makeText(MainActivity.this, "WELCOME " + childname.toUpperCase(), Toast.LENGTH_SHORT).show();
 
                                                                 i = 1;
-                                                                Intent i = new Intent(MainActivity.this, useractivity.class);
+                                                                Intent i = new Intent(MainActivity.this, Reactivity.class);
                                                                 i.putExtra("uid", aa);
                                                                 i.putExtra("child", username);
                                                                 pro.cancel();

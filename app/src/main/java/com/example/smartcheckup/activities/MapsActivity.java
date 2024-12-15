@@ -72,7 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+
             Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 */
@@ -99,7 +99,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 catch (Exception e)
                 {
-                    e.printStackTrace();
                     Toast.makeText(MapsActivity.this, e.getMessage()+"\nNO DATA AVAILABLE", Toast.LENGTH_SHORT).show();
                 }
 
@@ -169,10 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16.8f));
             Toast.makeText(MapsActivity.this, "CURRENT POSITION:\n" + add, Toast.LENGTH_LONG).show();
 */
-
-
     }
-
     @Override
     public void onBackPressed() {
         finish();

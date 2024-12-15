@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -49,8 +50,10 @@ public class ExampleDialogue extends AppCompatDialogFragment {
         editTextUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                // TODO document needed before the text changes
+                // Save the current state of the text before it changes
+                String previousText = s.toString();
+                // Log the state for debugging purposes
+                Log.d("TextInput", "Text before change: " + previousText + ", Start: " + start + ", Count: " + count + ", After: " + after);
             }
 
             @Override
