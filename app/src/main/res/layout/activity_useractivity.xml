@@ -156,7 +156,7 @@
             android:clickable="true"
             android:layout_width="160sp"
             android:layout_height="190sp"
-            android:onClick="heartbeat"
+            android:onClick="startSplashScreen"
             android:layout_margin="10sp"
             >
             <LinearLayout
