@@ -66,8 +66,6 @@
 
     </LinearLayout>
 
-
-
     <EditText
         android:id="@+id/parentid"
         android:layout_width="match_parent"
