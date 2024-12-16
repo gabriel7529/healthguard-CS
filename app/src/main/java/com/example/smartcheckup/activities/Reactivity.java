@@ -80,8 +80,8 @@ public class Reactivity extends AppCompatActivity implements
 
     private DatabaseReference locationinfo;
 
-    protected static final long UPDATE_INTERVAL = 20000;  /* 20 secs */
-    protected static final long FASTEST_INTERVAL = 4000; /* 2 sec */
+    protected static final long UPDATE_INTERVAL = 20000;
+    protected static final long FASTEST_INTERVAL = 4000;
 
 
     private LocationRequest locationRequest;
@@ -258,7 +258,7 @@ public class Reactivity extends AppCompatActivity implements
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
-    // Método para obtener la última ubicación conocida
+    // Metodo para obtener la última ubicación conocida
     public void getLastKnownLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
@@ -293,12 +293,14 @@ public class Reactivity extends AppCompatActivity implements
         return builder;
     }
 
+    /**
+     * @param context
+     * @return la ubicación de la persona
+     */
     protected boolean isLocationEnabled(Context context) {
         LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
-
-
 
     private boolean hasLocationPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
@@ -311,10 +313,6 @@ public class Reactivity extends AppCompatActivity implements
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                 LOCATION_PERMISSION_REQUEST_CODE);
     }
-
-
-
-
 
 
     protected void startLocationUpdates(Context context) {
@@ -384,8 +382,10 @@ public class Reactivity extends AppCompatActivity implements
         }
     }
 
-    public void heartbeat(View view) {
-        Toast.makeText(Reactivity.this,"STILL UNDER DEVELOPMENT",Toast.LENGTH_SHORT).show();
+    public void startSplashScreen(View view) {
+        Intent intent = new Intent(Reactivity.this, DetecFallActivity.class);
+        startActivity(intent);
+
     }
 
     public void alarm(View view) {
@@ -517,5 +517,5 @@ public class Reactivity extends AppCompatActivity implements
 
         }
 
-    }  //OPTION FOR WATCHCHANGE
+    }
 }

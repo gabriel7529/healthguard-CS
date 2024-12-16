@@ -2,4 +2,16 @@
     <string name="app_name">smartcheckup</string>
     <string name="title_activity_maps">Map</string>
     <string name="parents">Parents</string>
+    <string name="children">children</string>
+    <string name="useralarmminute">useralarmminute</string>
+    <string name="useralarmhour">useralarmhour</string>
+    <string name="no_alarm_preset">No Alarm Preset</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_settings">Settings</string>
+    <string name="alert_setting">Alert setting</string>
+    <string name="inactivity_timer_sec">Inactivity Timer (sec)</string>
+    <string name="impact_threshold">Impact Threshold</string>
+    <string name="fall_threshold">Fall Threshold</string>
+    <string name="send_sms_to">Send SMS to</string>
+    <string name="detection_setting">Detection setting</string>
 </resources>
